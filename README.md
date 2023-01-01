@@ -15,7 +15,7 @@ First, ensure you have a suitable autoloader set up.  A basic implementation is 
 For a bigger demo, see `demo.php` in this repository.
 
 Usage:
-```
+```php
 <?php
 
 $container = new Container();
@@ -24,7 +24,8 @@ $class = $container->get('FullyQualified\ClassName');
 
 // Or provide an array of class dependencies directly to improve performance:
 $container = new Container($classMap);
-// consults the classMap first to see if it already knows how to build this class.  Falls back to PHP's Reflection API otherwise
+// consults the classMap first to see if it already knows how to build this class.
+// Falls back to PHP's Reflection API otherwise
 $class = $container->get('FullyQualified\ClassName');
 
 // Instruct the container to not use the Reflection API:
