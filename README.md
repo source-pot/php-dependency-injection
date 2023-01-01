@@ -19,6 +19,17 @@ Usage:
 <?php
 
 $container = new Container();
+// uses PHP's Reflection API to build the dependencies
+$class = $container->get('FullyQualified\ClassName');
+
+// Or provide an array of class dependencies directly to improve performance:
+$container = new Container($classMap);
+// consults the classMap first to see if it already knows how to build this class.  Falls back to PHP's Reflection API otherwise
+$class = $container->get('FullyQualified\ClassName');
+
+// Instruct the container to not use the Reflection API:
+$container = new Container($classMap, false);
+// consults the classMap, otherwise throws an Exception
 $class = $container->get('FullyQualified\ClassName');
 ```
 
