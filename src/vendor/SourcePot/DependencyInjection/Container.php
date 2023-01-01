@@ -26,7 +26,7 @@ class Container implements ContainerInterface
             $this->resolveDependencies($identifier);
         }
 
-        // Instantiate each of the dependencies using recursion and this method
+        // Instantiate each of the dependencies using this method recursively
         $dependencies = array_map(
             fn($dependency) => $this->get($dependency),
             $this->classMap[$identifier]
@@ -55,7 +55,6 @@ class Container implements ContainerInterface
 
     private function getDependencies(string $identifier): array
     {
-        echo "Manually finding dependencies for $identifier\n";
         // return an array of class names that are dependencies of the
         // given classes constructor
         $deps = [];

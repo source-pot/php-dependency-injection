@@ -7,9 +7,6 @@
         "SourcePot\\Vehicle\\Wheel"
     ],
     "SourcePot\\Vehicle\\Engine": [],
-    "SourcePot\\Vehicle\\Wheel": [
-        "SourcePot\\Vehicle\\Tyre"
-    ],
     "SourcePot\\Vehicle\\Tyre": [],
     "SourcePot\\Vehicle\\Bicycle": [
         "SourcePot\\Vehicle\\Wheel",
