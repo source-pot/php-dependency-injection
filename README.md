@@ -33,12 +33,3 @@ $container = new Container($classMap, false);
 // consults the classMap, otherwise throws an Exception
 $class = $container->get('FullyQualified\ClassName');
 ```
-
-
-## includes
-* PHP 8.2 Docker environment
-    * Run `docker compose up -d` to start the container
-    * Run `docker compose exec php bash` to enter a bash terminal in the container where you can manually run php commands, for example `php demo.php`
-* A basic autoloader to find files containing classes
-* A demo file that shows the Dependency Injection in use (`demo.php`)
-* PSR interfaces for classes created for the Dependency Injection features (see [PHP-FIG](https://www.php-fig.org/psr/psr-11/) for more details)
