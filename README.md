@@ -9,12 +9,12 @@ Due to limitations in PHP itself, variables like `string` and `int` can't be aut
 
 Note: This is a simple implementation, it does not support union types (`ClassOne|ClassTwo`), nor does it handle default values (`int $i = 0`)
 
-## usage
+## Usage
 First, ensure you have a suitable autoloader set up.  A basic implementation is provided in this demo (see `SourcePot\Autoloader.php`).
 
 For a bigger demo, see `demo.php` in this repository.
 
-Usage:
+### Code example:
 ```php
 <?php
 
@@ -34,11 +34,21 @@ $container = new Container($classMap, false);
 $class = $container->get('FullyQualified\ClassName');
 ```
 
+### Classmap injection:
+To save additional checks with the Reflection API, you can pass an array into the Container constructor.  
+This will be consulted first, before invoking the Reflection API.   This does mean that if a class has new dependencies
+not mentioned in the classMap, an error will occur (unless the other dependencies have default values).
+```php
+<?php
 
-## includes
-* PHP 8.2 Docker environment
-    * Run `docker compose up -d` to start the container
-    * Run `docker compose exec php bash` to enter a bash terminal in the container where you can manually run php commands, for example `php demo.php`
-* A basic autoloader to find files containing classes
-* A demo file that shows the Dependency Injection in use (`demo.php`)
-* PSR interfaces for classes created for the Dependency Injection features (see [PHP-FIG](https://www.php-fig.org/psr/psr-11/) for more details)
+$classMap = [
+    \\FullyQualified\\ClassName' => [
+        '\\Dependency\\First',
+        '\\Dependency\\Second'
+    ]
+];
+
+$container = new Container($classMap);
+
+$container->get(\FullyQualified\Class::class);
+```
