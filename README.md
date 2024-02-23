@@ -9,12 +9,12 @@ Due to limitations in PHP itself, variables like `string` and `int` can't be aut
 
 Note: This is a simple implementation, it does not support union types (`ClassOne|ClassTwo`), nor does it handle default values (`int $i = 0`)
 
-## usage
+## Usage
 First, ensure you have a suitable autoloader set up.  A basic implementation is provided in this demo (see `SourcePot\Autoloader.php`).
 
 For a bigger demo, see `demo.php` in this repository.
 
-Usage:
+### Code example:
 ```php
 <?php
 
@@ -32,4 +32,23 @@ $class = $container->get('FullyQualified\ClassName');
 $container = new Container($classMap, false);
 // consults the classMap, otherwise throws an Exception
 $class = $container->get('FullyQualified\ClassName');
+```
+
+### Classmap injection:
+To save additional checks with the Reflection API, you can pass an array into the Container constructor.  
+This will be consulted first, before invoking the Reflection API.   This does mean that if a class has new dependencies
+not mentioned in the classMap, an error will occur (unless the other dependencies have default values).
+```php
+<?php
+
+$classMap = [
+    \\FullyQualified\\ClassName' => [
+        '\\Dependency\\First',
+        '\\Dependency\\Second'
+    ]
+];
+
+$container = new Container($classMap);
+
+$container->get(\FullyQualified\Class::class);
 ```
